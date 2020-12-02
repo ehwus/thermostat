@@ -1,4 +1,4 @@
-const Thermostat = require('./thermostat')
+const { Thermostat } = require("./thermostat")
 
 describe('Thermostat', () => {
     it('initializes with a temperature of 20', () => {
