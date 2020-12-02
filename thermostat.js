@@ -31,6 +31,16 @@ class Thermostat {
     reset = function() {
         this.temperature = 20;
     }
+
+    currentUsage = function() {
+        if (this.temperature >= 18 && this.temperature <= 25) {
+            return 'medium-usage';
+        } else if (this.temperature < 18) {
+            return 'low-usage';
+        } else {
+            return 'high-usage';
+        }
+    }
 }
 
 module.exports = Thermostat;

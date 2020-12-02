@@ -85,4 +85,39 @@ describe('Thermostat', () => {
             expect(testThermostat.temperature).toEqual(20);
         })
     })
+
+    describe('currentUsage()', () => {
+        it('returns medium-usage between 18 & 25', () => {
+            let testThermostat = new Thermostat;
+            for(let i = 0; i < 2; i++) {
+                testThermostat.down();
+            }
+            for(let i = 0; i < 8; i++) {
+                expect(testThermostat.currentUsage()).toEqual('medium-usage');
+            }
+        })
+
+        it('returns low usage below 18', () => {
+            let testThermostat = new Thermostat;
+            for(let i = 0; i < 3; i++) {
+                testThermostat.down()
+            }
+            for(let i = 0; i < 10; i++) {
+                expect(testThermostat.currentUsage()).toEqual('low-usage');
+                testThermostat.down();
+            }
+        })
+
+        it('returns high usage > 25', () => {
+            let testThermostat = new Thermostat;
+            testThermostat.powerSaveOff();
+            for(let i = 0; i < 6; i++) {
+                testThermostat.up()
+            }
+            for(let i = 0; i < 5; i++) {
+                expect(testThermostat.currentUsage()).toEqual('high-usage')
+                testThermostat.up()
+            }
+        })
+    })
 })
